@@ -20,7 +20,6 @@ fun DefaultRadioButton(
     onSelect: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
@@ -34,6 +33,6 @@ fun DefaultRadioButton(
             )
         )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = text, style =  MaterialTheme.typography.body1)
+        Text(text = text, style = MaterialTheme.typography.body1)
     }
 }

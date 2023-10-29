@@ -42,7 +42,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Composable
-fun AddEditScreen(
+fun AddEditNoteScreen(
     navController: NavController,
     noteColor: Int,
     viewModel: AddEditNoteViewModel = hiltViewModel()
@@ -80,7 +80,7 @@ fun AddEditScreen(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(onClick = {
-                viewModel.onEven(AddEditNoteEvent.SaveNote)
+                viewModel.onEvent(AddEditNoteEvent.SaveNote)
             }, backgroundColor = MaterialTheme.colors.primary
             ) {
                 Icon(imageVector = Icons.Default.Save, contentDescription = "Save note")
@@ -107,6 +107,7 @@ fun AddEditScreen(
                             .size(50.dp)
                             .shadow(15.dp, CircleShape)
                             .clip(CircleShape)
+                            .background(color)
                             .border(
                                 width = 3.dp,
                                 color = if (viewModel.noteColor.value == colorInt) {
@@ -123,7 +124,7 @@ fun AddEditScreen(
                                         )
                                     )
                                 }
-                                viewModel.onEven(AddEditNoteEvent.ChangeColor(colorInt))
+                                viewModel.onEvent(AddEditNoteEvent.ChangeColor(colorInt))
                             }
                     )
                 }
@@ -133,10 +134,10 @@ fun AddEditScreen(
                 text = titleState.text,
                 hint = titleState.hint,
                 onValueChange = {
-                                viewModel.onEven(AddEditNoteEvent.EnteredTitle(it))
+                                viewModel.onEvent(AddEditNoteEvent.EnteredTitle(it))
                 },
                 onFocusChange = {
-                    viewModel.onEven(AddEditNoteEvent.ChangeTitleFocus(it))
+                    viewModel.onEvent(AddEditNoteEvent.ChangeTitleFocus(it))
                 },
                 isHintVisible = titleState.isHintVisible,
                 singleLine = true,
@@ -147,10 +148,10 @@ fun AddEditScreen(
                 text = contentState.text,
                 hint = contentState.hint,
                 onValueChange = {
-                    viewModel.onEven(AddEditNoteEvent.EnteredContent(it))
+                    viewModel.onEvent(AddEditNoteEvent.EnteredContent(it))
                 },
                 onFocusChange = {
-                    viewModel.onEven(AddEditNoteEvent.ChangeContentFocus(it))
+                    viewModel.onEvent(AddEditNoteEvent.ChangeContentFocus(it))
                 },
                 isHintVisible = contentState.isHintVisible,
                 singleLine = false,

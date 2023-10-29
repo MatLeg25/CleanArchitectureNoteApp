@@ -54,7 +54,7 @@ fun NotesScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                  navController.navigate(Screen.AddEditNoteScreen.route)
+                    navController.navigate(Screen.AddEditNoteScreen.route)
                 },
                 backgroundColor = MaterialTheme.colors.primary
             ) {
@@ -80,55 +80,54 @@ fun NotesScreen(
                 IconButton(
                     onClick = {
                         viewModel.onEvent(NotesEvent.ToggleOrderSection)
-                    }
+                    },
                 ) {
                     Icon(
                         imageVector = Icons.Default.Sort,
                         contentDescription = "Sort"
                     )
                 }
-                AnimatedVisibility(
-                    visible = state.isOrderSectionVisible,
-                    enter = fadeIn() + slideInVertically(),
-                    exit = fadeOut() + slideOutVertically()
-                ) {
-                    OrderSection(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 16.dp),
-                        noteOrder = state.noteOrder,
-                        onOrderChange = {
-                            viewModel.onEvent(NotesEvent.Order(it))
-                        }
-                    )
-                }
+            }
+            AnimatedVisibility(
+                visible = state.isOrderSectionVisible,
+                enter = fadeIn() + slideInVertically(),
+                exit = fadeOut() + slideOutVertically()
+            ) {
+                OrderSection(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 16.dp),
+                    noteOrder = state.noteOrder,
+                    onOrderChange = {
+                        viewModel.onEvent(NotesEvent.Order(it))
+                    }
+                )
             }
             Spacer(modifier = Modifier.height(16.dp))
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(state.notes) { note ->
                     NoteItem(
                         note = note,
-                        modifier= Modifier
+                        modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                               navController.navigate(
-                                   Screen.AddEditNoteScreen.route +
-                                   "?noteId=${note.id}&noteColor=${note.color}"
-                               )
+                                navController.navigate(
+                                    Screen.AddEditNoteScreen.route +
+                                            "?noteId=${note.id}&noteColor=${note.color}"
+                                )
                             },
                         onDeleteClick = {
                             viewModel.onEvent(NotesEvent.DeleteNote(note))
                             scope.launch {
                                 val result = scaffoldState.snackbarHostState.showSnackbar(
-                                    message = "Notes deleted",
+                                    message = "Note deleted",
                                     actionLabel = "Undo"
                                 )
-                                if (result == SnackbarResult.ActionPerformed) {
+                                if(result == SnackbarResult.ActionPerformed) {
                                     viewModel.onEvent(NotesEvent.RestoreNote)
                                 }
                             }
                         }
-
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                 }
