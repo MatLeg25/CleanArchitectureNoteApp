@@ -3,7 +3,6 @@ package com.plcoding.cleanarchitecturenoteapp.feature_note.presentation.add_edit
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.toArgb
-import androidx.core.content.contentValuesOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -48,11 +47,11 @@ class AddEditNoteViewModel @Inject constructor(
                         currentNoteId = note.id
                         _noteTitle.value = noteTitle.value.copy(
                             text = note.title,
-                            isHinVisible = false
+                            isHintVisible = false
                         )
                         _noteContent.value = noteContent.value.copy(
                             text = note.content,
-                            isHinVisible = false
+                            isHintVisible = false
                         )
                         _noteColor.value = note.color
                     }
@@ -70,7 +69,7 @@ class AddEditNoteViewModel @Inject constructor(
             }
             is AddEditNoteEvent.ChangeTitleFocus -> {
                 _noteTitle.value = noteTitle.value.copy(
-                    isHinVisible = !event.focusState.isFocused &&
+                    isHintVisible = !event.focusState.isFocused &&
                             noteTitle.value.text.isBlank()
                 )
             }
@@ -81,7 +80,7 @@ class AddEditNoteViewModel @Inject constructor(
             }
             is AddEditNoteEvent.ChangeContentFocus -> {
                 _noteContent.value = noteContent.value.copy(
-                    isHinVisible = !event.focusState.isFocused &&
+                    isHintVisible = !event.focusState.isFocused &&
                             noteContent.value.text.isBlank()
                 )
             }

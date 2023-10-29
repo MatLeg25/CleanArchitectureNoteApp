@@ -3,5 +3,5 @@ package com.plcoding.cleanarchitecturenoteapp.feature_note.presentation.add_edit
 data class NoteTextFieldState(
     val text: String = "",
     val hint: String = "",
-    val isHinVisible: Boolean = true,
+    val isHintVisible: Boolean = true,
 )
