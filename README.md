@@ -31,6 +31,6 @@ The app uses RoomDB to store data.
 - Kotlin
 - MVVM
 - DI with Dagger-Hilt
-- Retrofit
+- RoomDB
 - Jetpack Compose
 - Jetpack Navigation
