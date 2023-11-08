@@ -28,7 +28,7 @@ The app uses RoomDB to store data.
 
 ## Tech stack:
 - Android
-- Kotlin
+- Kotlin, Coroutines, Flow
 - MVVM
 - DI with Dagger-Hilt
 - RoomDB
